@@ -4,11 +4,72 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Arch
+    100004: Body
+    100006: Box
+    100008: Camera
+    100010: Door
+    100012: Face
+    100014: Floor2x2
+    100016: Floor4x4
+    100018: Floor8x8
+    100020: Lamp
+    100022: Platform
+    100024: Switch
     400000: //RootNode
+    400002: Arch
+    400004: Body
+    400006: Box
+    400008: Camera
+    400010: Door
+    400012: Face
+    400014: Floor2x2
+    400016: Floor4x4
+    400018: Floor8x8
+    400020: Lamp
+    400022: Platform
+    400024: Switch
+    2000000: Camera
     2100000: Switch
+    2100002: Floor
+    2100004: Box
+    2100006: Door
+    2100008: arch
+    2100010: Face
+    2100012: Body
     2300000: //RootNode
+    2300002: Arch
+    2300004: Body
+    2300006: Box
+    2300008: Door
+    2300010: Face
+    2300012: Floor2x2
+    2300014: Floor4x4
+    2300016: Floor8x8
+    2300018: Platform
+    2300020: Switch
     3300000: //RootNode
+    3300002: Arch
+    3300004: Body
+    3300006: Box
+    3300008: Door
+    3300010: Face
+    3300012: Floor2x2
+    3300014: Floor4x4
+    3300016: Floor8x8
+    3300018: Platform
+    3300020: Switch
     4300000: Switch
+    4300002: Platform
+    4300004: Box
+    4300006: Door
+    4300008: Arch
+    4300010: Floor2x2
+    4300012: Floor4x4
+    4300014: Floor8x8
+    4300016: Face
+    4300018: Body
+    10800000: Lamp
   externalObjects: {}
   materials:
     importMaterials: 1
