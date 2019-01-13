@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public bool isPlayerOne;
+    [HideInInspector] public Vector3 MoveVector = Vector3.zero;
 
     [SerializeField] float moveSpeed = 5f;
 
@@ -18,39 +18,25 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 moveInput = Vector3.zero;
-
-        if (isPlayerOne)
-        {
-            moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        }
-        else
-        {
-            moveInput = new Vector3(Input.GetAxisRaw("Horizontal2"), 0, Input.GetAxisRaw("Vertical2"));
-        }
-
-        Vector3 moveVector = Camera.main.transform.TransformDirection(moveInput);
-        moveVector.y = 0;
-
-        Move(moveVector);
-        Turn(moveVector);
+        Move();
+        Turn();
     }
 
-    void Move(Vector3 moveVector)
+    void Move()
     {
-        if (moveVector.sqrMagnitude > 1)
-            moveVector.Normalize();
+        if (MoveVector.sqrMagnitude > 1)
+            MoveVector.Normalize();
 
-        Vector3 movement = moveVector * moveSpeed;
+        Vector3 movement = MoveVector * moveSpeed;
 
         rigidbody.MovePosition(transform.position + movement * Time.deltaTime);
     }
 
-    void Turn (Vector3 moveVector)
+    void Turn ()
     {
-        if (moveVector == Vector3.zero)
+        if (MoveVector == Vector3.zero)
             return;
 
-        rigidbody.MoveRotation(Quaternion.LookRotation(moveVector));
+        rigidbody.MoveRotation(Quaternion.LookRotation(MoveVector));
     }
 }
