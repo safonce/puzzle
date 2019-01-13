@@ -4,32 +4,24 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public GameObject availableDoor = null;
+    [HideInInspector] public Key key;
 
-    public Key item;
-
-    private void Update()
+    public bool HasKey(Key requiredKey)
     {
-       if (availableDoor & Input.GetKeyUp(KeyCode.E))
-        {
-            UseItem();
-        }
+        // Compare inventory key with door key
+        if (key == requiredKey)
+            return true;
+
+        return false;
     }
 
-    public void UseItem ()
+    public void AddKey(Key newKey)
     {
-        if (item.triggerableObject != availableDoor)
-            return;
-
-        availableDoor.GetComponentInParent<BoxCollider>().enabled = false;
-
-        GameManager.Instance.OpenDoor(availableDoor);
-
-        item = null;
+        key = newKey;
     }
 
-    public bool IsEmpty()
+    public bool IsEmpty ()
     {
-        return item == null;
+        return key == null;
     }
 }
