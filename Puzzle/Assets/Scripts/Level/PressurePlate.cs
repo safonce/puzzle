@@ -10,6 +10,8 @@ public class PressurePlate : MonoBehaviour
 
     Animator animator;
 
+    public List<GameObject> pressingObject = new List<GameObject>();
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -17,6 +19,11 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger)
+            return;
+
+        pressingObject.Add(other.gameObject);
+
         animator.SetTrigger(pressParam);
 
         if (triggerableObject != null)
@@ -25,6 +32,14 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.isTrigger)
+            return;
+
+        pressingObject.Remove(other.gameObject);
+
+        if (pressingObject.Count > 0)
+            return;
+
         if (needWeight)
         {
             animator.SetTrigger(pressParam);
