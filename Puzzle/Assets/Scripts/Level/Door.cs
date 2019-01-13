@@ -4,32 +4,43 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] GameObject door = null;
-    [SerializeField] bool requireKey = false;
-    
+    [SerializeField] Key requiredKey  = null;
+    [SerializeField] GameObject doorObject = null;
+
+    bool unlock = false;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (!requireKey)
+        if (unlock)
             return;
 
-        PlayerInventory pi = other.GetComponent<PlayerInventory>();
+        if (other.CompareTag("Player"))
+        {
+            // Check if key is required
+            if (IsRequiredKey())
+            {
+                // Make sure player has inventory
+                PlayerInventory inventory = other.GetComponent<PlayerInventory>();
+                if (inventory == null)
+                    return;
 
-        if (pi == null)
-            return;
-
-        pi.availableDoor = door;
+                // Check if player has the key in the inventory
+                if (inventory.HasKey(requiredKey))
+                {
+                    // If key is found then unlock and open the door
+                    GameManager.Instance.OpenDoor(doorObject);
+                    unlock = true;
+                }
+            }
+            else
+            {
+                GameManager.Instance.OpenDoor(doorObject);
+            }
+        }
     }
 
-    private void OnTriggerExit(Collider other)
+    bool IsRequiredKey ()
     {
-        if (!requireKey)
-            return;
-
-        PlayerInventory pi = other.GetComponent<PlayerInventory>();
-
-        if (pi == null)
-            return;
-
-        pi.availableDoor = null;
+        return requiredKey != null;
     }
 }
