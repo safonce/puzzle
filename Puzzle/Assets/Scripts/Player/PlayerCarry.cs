@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerCarry : MonoBehaviour
 {
-    public GameObject itemAvailable;
-    bool carrying = false;
+    [HideInInspector] public GameObject itemAvailable = null;
+    [HideInInspector] public bool Carrying = false;
+
+    [SerializeField] float zOffset = 0.1f;
+
 
     CapsuleCollider capsuleCollider;
 
@@ -14,41 +17,27 @@ public class PlayerCarry : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            if (carrying)
-            {
-                Drop();
-            }
-            else
-            {
-                PickUp();
-            }
-        }
-    }
-
-    void PickUp ()
+    public void PickUp ()
     {
         if (itemAvailable == null) return;
 
         itemAvailable.GetComponent<SphereCollider>().enabled = false;
 
         itemAvailable.transform.parent = transform;
-        itemAvailable.transform.localPosition = new Vector3(0, itemAvailable.GetComponent<BoxCollider>().size.y /2, capsuleCollider.radius + 0.1f + itemAvailable.GetComponent<BoxCollider>().size.z / 2);
+        itemAvailable.transform.localPosition = new Vector3(0, itemAvailable.GetComponent<BoxCollider>().size.y /2, 
+                                    capsuleCollider.radius + zOffset + itemAvailable.GetComponent<BoxCollider>().size.z / 2);
         itemAvailable.transform.localRotation = Quaternion.identity;
 
-        carrying = true;
+        Carrying = true;
     }
 
-    void Drop ()
+    public void Drop ()
     {
         if (itemAvailable == null) return;
 
         itemAvailable.GetComponent<SphereCollider>().enabled = true;
 
         itemAvailable.transform.parent = GameManager.Instance.props;
-        carrying = false;
+        Carrying = false;
     }
 }
