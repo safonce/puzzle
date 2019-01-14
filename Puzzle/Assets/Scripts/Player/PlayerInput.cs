@@ -6,6 +6,7 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] string horizontal = "Horizontal";
     [SerializeField] string vertical = "Vertical";
+    [SerializeField] string action = "Action";
 
     PlayerMovement playerMovement;
     PlayerCarry playerCarry;
@@ -45,7 +46,7 @@ public class PlayerInput : MonoBehaviour
 
     void SetAction ()
     {
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetButtonUp(action))
         {
             if (playerCarry.Carrying)
                 playerCarry.Drop();
