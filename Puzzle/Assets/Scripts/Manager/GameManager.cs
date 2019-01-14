@@ -18,7 +18,11 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
-    
+
+    private void Start()
+    {
+        
+    }
     public void OpenDoor (GameObject door)
     {
         door.SetActive(false);
@@ -27,5 +31,16 @@ public class GameManager : MonoBehaviour
     public void CloseDoor(GameObject door)
     {
         door.SetActive(true);
+    }
+
+    public void GameOver ()
+    {
+        LevelManager.Instance.RestartLevel();
+    }
+
+    public void Win ()
+    {
+        int currentLevel = LevelManager.Instance.CurrentScene() + 1;
+        LevelManager.Instance.LoadScene(currentLevel);
     }
 }
