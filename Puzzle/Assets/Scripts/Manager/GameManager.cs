@@ -33,6 +33,17 @@ public class GameManager : MonoBehaviour
         door.SetActive(true);
     }
 
+    public void OpenBridge(GameObject bridge)
+    {
+        bridge.SetActive(true);
+    }
+
+    public void CloseBridge(GameObject bridge)
+    {
+        bridge.SetActive(false);
+    }
+
+
     public void GameOver ()
     {
         LevelManager.Instance.RestartLevel();
